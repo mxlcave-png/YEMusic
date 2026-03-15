@@ -32,6 +32,19 @@ h2 {
     font-size: 32px;
     margin: 40px 0 20px 0;
 }
+/* ===== Barre de recherche ===== */
+.search-container {
+    text-align: center;       /* centre la barre */
+    margin: 20px 0;
+}
+
+#search {
+    padding: 8px 12px;
+    width: 50%;               /* largeur de la barre */
+    border-radius: 20px;      /* arrondi */
+    border: none;
+    font-size: 16px;
+}
 
 /* ===== Conteneur artistes ===== */
 .artistes {

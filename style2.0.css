@@ -2,7 +2,7 @@
 /* ===== Fond avec lignes rappelant le logo ===== */
 body {
     background-color: #black; /* fond sombre de base */
-    color: white;
+    color: black;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;

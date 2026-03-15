@@ -158,6 +158,21 @@
 <footer>
     <p>Projet SNT - Yves-Edrick MONLOUIS - YEMusic - 2026</p>
 </footer>
+<script>
+const searchInput = document.getElementById('search');
+const artistes = document.querySelectorAll('.artiste');
 
+searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase();
+    artistes.forEach(artiste => {
+        const name = artiste.querySelector('h3').textContent.toLowerCase();
+        if(name.includes(filter)) {
+            artiste.style.display = 'block';
+        } else {
+            artiste.style.display = 'none';
+        }
+    });
+});
+</script>
 </body>
 </html>

@@ -117,3 +117,39 @@ footer {
     padding: 30px 15px;
     margin-top: 40px;
 }
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;      /* logo et menu empilés */
+        align-items: center;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    .artistes {
+        flex-direction: column;      /* cartes empilées verticalement */
+        gap: 15px;                   /* moins d’espace entre les cartes */
+        align-items: center;         /* centrer les cartes */
+    }
+
+    .artiste {
+        width: 90%;                  /* prend presque toute la largeur */
+    }
+
+    .albums li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .album-cover {
+        width: 50px;                 /* réduire taille album sur mobile */
+        height: 50px;
+    }
+
+    main h2 {
+        text-align: center;          /* centrer les catégories */
+    }
+}

@@ -1,16 +1,15 @@
-/* ===== Style général ===== */
-/* ===== Fond avec lignes rappelant le logo ===== */
+
 body {
-    background-color:#181818 ; /* fond sombre de base */
+    background-color:#181818 ; 
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-/* ===== Header ===== */
+
 header {
-    background-color: #1E1E1E; /* noir comme le logo */
+    background-color: #1E1E1E; 
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -22,13 +21,27 @@ header img.logo {
     max-width: 150px;
 }
 
-/* ===== Navigation ===== */
+
 nav {
     display: flex;
     gap: 15px;
 }
 
-/* ===== Barre de recherche ===== */
+.btn-artistes
+    display: inline-block;
+    padding: 8px 16px;           
+    background: #1DB954;         
+    color: white;                
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 20px;        
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-artistes:hover {
+    background: #1ed760;         
+    transform: scale(1.05);  
+
 .search-container {
     text-align: center;
     margin: 20px 0;
@@ -43,19 +56,19 @@ nav {
     font-size: 16px;
 }
 
-/* ===== Main ===== */
+
 main {
     padding: 20px;
 }
 
-/* ===== Titres catégories ===== */
+
 h2 {
     text-align: center;
     font-size: 32px;
     margin: 40px 0 20px 0;
 }
 
-/* ===== Conteneur artistes ===== */
+
 .artistes {
     display: flex;
     justify-content: center;
@@ -63,7 +76,7 @@ h2 {
     flex-wrap: wrap;
 }
 
-/* ===== Carte artiste ===== */
+
 .artiste {
     background-color: #1E1E1E;
     border-radius: 10px;
@@ -80,21 +93,21 @@ h2 {
     border: 1px solid #1DB954;
 }
 
-/* ===== Image artiste ===== */
+
 .artiste img {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-/* ===== Liste albums ===== */
+
 .albums {
     list-style: none;
     padding: 0;
     margin-top: 10px;
 }
 
-/* ===== Ligne album ===== */
+
 .albums li {
     display: flex;
     align-items: center;
@@ -105,7 +118,7 @@ h2 {
     border-radius: 6px;
 }
 
-/* ===== Image album (ronde comme Spotify) ===== */
+
 .album-cover {
     width: 45px;
     height: 45px;
@@ -120,7 +133,6 @@ h2 {
     transform: scale(1.2);
 }
 
-/* ===== Footer ===== */
 footer {
     background-color: #1E1E1E;
     text-align: center;
@@ -128,10 +140,10 @@ footer {
     margin-top: 40px;
 }
 
-/* ===== Responsive mobile ===== */
+
 @media screen and (max-width: 768px) {
 
-    /* Header empilé */
+    
     header {
         flex-direction: column;
         align-items: center;
@@ -145,28 +157,28 @@ footer {
         gap: 10px;
     }
 
-    /* Barre de recherche */
+    
     #search {
         width: 90%;
         max-width: 400px;
     }
 
-    /* Conteneur artistes */
+    
     .artistes {
         flex-direction: column;  /* cartes empilées verticalement */
         gap: 15px;
         align-items: center;
     }
 
-    /* Carte artiste */
+   
     .artiste {
-        width: 90%;              /* presque toute la largeur */
-        max-width: 300px;        /* limite sur grands téléphones */
+        width: 90%;              
+        max-width: 300px;        
     }
 
-    /* Albums */
+    
     .albums li {
-        flex-direction: row;     /* image à gauche, texte à droite */
+        flex-direction: row;     
         align-items: center;
         gap: 10px;
         font-size: 13px;
@@ -177,14 +189,14 @@ footer {
         height: 45px;
     }
 
-    /* Titres catégories centrés et adaptés */
+   
     h2 {
         font-size: 24px;
         margin: 30px 0 15px 0;
         text-align: center;
     }
 
-    /* Footer */
+    
     footer {
         padding: 20px 15px;
     }

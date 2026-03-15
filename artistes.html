@@ -160,16 +160,33 @@
 </footer>
 <script>
 const searchInput = document.getElementById('search');
-const artistes = document.querySelectorAll('.artiste');
+const categories = document.querySelectorAll('main h2'); // les titres des catégories
 
 searchInput.addEventListener('input', () => {
     const filter = searchInput.value.toLowerCase();
-    artistes.forEach(artiste => {
-        const name = artiste.querySelector('h3').textContent.toLowerCase();
-        if(name.includes(filter)) {
-            artiste.style.display = 'block';
+
+    categories.forEach(title => {
+        const container = title.nextElementSibling; // div.artistes juste après le h2
+        const artistes = container.querySelectorAll('.artiste');
+        let visibleCount = 0;
+
+        artistes.forEach(artiste => {
+            const name = artiste.querySelector('h3').textContent.toLowerCase();
+            if (name.includes(filter)) {
+                artiste.style.display = 'block';
+                visibleCount++;
+            } else {
+                artiste.style.display = 'none';
+            }
+        });
+
+        // Masquer le titre et le container si aucune carte n'est visible
+        if (visibleCount === 0) {
+            title.style.display = 'none';
+            container.style.display = 'none';
         } else {
-            artiste.style.display = 'none';
+            title.style.display = 'block';
+            container.style.display = 'flex'; // pour que le flex fonctionne
         }
     });
 });

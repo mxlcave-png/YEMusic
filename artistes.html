@@ -6,7 +6,70 @@
     <link rel="stylesheet" href="style2.0.css">
 </head>
 <body>
+<canvas id="backgroundCanvas"></canvas>
 
+<script>
+const canvas = document.getElementById('backgroundCanvas');
+const ctx = canvas.getContext('2d');
+
+let lines = [];
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initLines();
+}
+
+window.addEventListener('resize', resizeCanvas);
+
+function initLines() {
+    lines = [];
+    for (let i = 0; i < 200; i++) {
+        lines.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5, // vitesse horizontale
+            vy: (Math.random() - 0.5) * 0.5, // vitesse verticale
+            length: Math.random() * 100 + 20,
+            width: Math.random() * 2 + 0.5
+        });
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    lines.forEach(line => {
+        // Couleur dégradé pour chaque ligne
+        const grad = ctx.createLinearGradient(line.x, line.y, line.x + line.length, line.y + line.length);
+        grad.addColorStop(0, '#50C878'); // Vert émeraude
+        grad.addColorStop(0.5, '#40E0D0'); // Turquoise
+        grad.addColorStop(1, '#ADD8E6'); // Bleu clair
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = line.width;
+
+        // dessin d’une ligne légèrement “gribouillée”
+        ctx.beginPath();
+        ctx.moveTo(line.x, line.y);
+        ctx.lineTo(line.x + line.length * Math.sin(Math.random() * Math.PI), line.y + line.length * Math.cos(Math.random() * Math.PI));
+        ctx.stroke();
+
+        // mise à jour de la position
+        line.x += line.vx;
+        line.y += line.vy;
+
+        // rebondir si on sort de l’écran
+        if (line.x > canvas.width || line.x < 0) line.vx *= -1;
+        if (line.y > canvas.height || line.y < 0) line.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+}
+
+resizeCanvas();
+draw();
+</script>
 <!-- ===== Header ===== -->
 <header>
     <a href="index.html">

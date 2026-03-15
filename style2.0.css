@@ -9,7 +9,7 @@ body {
 
 /* ===== Header ===== */
 header {
-    background-color: #000000; /* noir comme le logo */
+    background-color: #1E1E1E; /* noir comme le logo */
     padding: 10px 20px;
     display: flex;
     align-items: center;

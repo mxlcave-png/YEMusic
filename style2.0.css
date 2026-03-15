@@ -9,7 +9,7 @@ body {
 
 /* ===== Header ===== */
 header {
-    background-color: #000000;
+    background-color: #000000; /* noir comme le logo */
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -19,6 +19,27 @@ header {
 header img.logo {
     height: 40px;
     max-width: 150px;
+}
+
+/* ===== Navigation ===== */
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+/* ===== Barre de recherche ===== */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#search {
+    padding: 8px 12px;
+    width: 50%;
+    max-width: 400px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
 }
 
 /* ===== Main ===== */
@@ -31,19 +52,6 @@ h2 {
     text-align: center;
     font-size: 32px;
     margin: 40px 0 20px 0;
-}
-/* ===== Barre de recherche ===== */
-.search-container {
-    text-align: center;       /* centre la barre */
-    margin: 20px 0;
-}
-
-#search {
-    padding: 8px 12px;
-    width: 50%;               /* largeur de la barre */
-    border-radius: 20px;      /* arrondi */
-    border: none;
-    font-size: 16px;
 }
 
 /* ===== Conteneur artistes ===== */
@@ -96,7 +104,7 @@ h2 {
     border-radius: 6px;
 }
 
-/* ===== Image album (RONDE comme Spotify) ===== */
+/* ===== Image album (ronde comme Spotify) ===== */
 .album-cover {
     width: 45px;
     height: 45px;
@@ -110,6 +118,7 @@ h2 {
 .album-cover:hover {
     transform: scale(1.2);
 }
+
 /* ===== Footer ===== */
 footer {
     background-color: #1E1E1E;
@@ -117,39 +126,65 @@ footer {
     padding: 30px 15px;
     margin-top: 40px;
 }
+
+/* ===== Responsive mobile ===== */
 @media screen and (max-width: 768px) {
+
+    /* Header empilé */
     header {
-        flex-direction: column;      /* logo et menu empilés */
+        flex-direction: column;
         align-items: center;
+        padding: 10px;
     }
 
     nav {
         margin-top: 10px;
-    }
-
-    .artistes {
-        flex-direction: column;      /* cartes empilées verticalement */
-        gap: 15px;                   /* moins d’espace entre les cartes */
-        align-items: center;         /* centrer les cartes */
-    }
-
-    .artiste {
-        width: 90%;                  /* prend presque toute la largeur */
-    }
-
-    .albums li {
-        display: flex;
+        text-align: center;
         flex-direction: row;
-        align-items: center;
         gap: 10px;
     }
 
-    .album-cover {
-        width: 50px;                 /* réduire taille album sur mobile */
-        height: 50px;
+    /* Barre de recherche */
+    #search {
+        width: 90%;
+        max-width: 400px;
     }
 
-    main h2 {
-        text-align: center;          /* centrer les catégories */
+    /* Conteneur artistes */
+    .artistes {
+        flex-direction: column;  /* cartes empilées verticalement */
+        gap: 15px;
+        align-items: center;
+    }
+
+    /* Carte artiste */
+    .artiste {
+        width: 90%;              /* presque toute la largeur */
+        max-width: 300px;        /* limite sur grands téléphones */
+    }
+
+    /* Albums */
+    .albums li {
+        flex-direction: row;     /* image à gauche, texte à droite */
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .album-cover {
+        width: 45px;
+        height: 45px;
+    }
+
+    /* Titres catégories centrés et adaptés */
+    h2 {
+        font-size: 24px;
+        margin: 30px 0 15px 0;
+        text-align: center;
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px 15px;
     }
 }

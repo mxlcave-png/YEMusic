@@ -1,128 +1,56 @@
-/* ===== Style général ===== */
-body {
-    background-color: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-/* ===== Header ===== */
-header {
-    background-color: #000000;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-header img.logo {
-    height: 40px;
-    max-width: 150px;
-}
-
-/* ===== Main ===== */
-main {
-    padding: 20px;
-}
-
-/* ===== Titres catégories ===== */
-h2 {
-    text-align: center;
-    font-size: 32px;
-    margin: 40px 0 20px 0;
-}
-/* ===== Barre de recherche ===== */
-.search-container {
-    text-align: center;       /* centre la barre */
-    margin: 20px 0;           /* espace au-dessus et en dessous */
-}
-
-#search {
-    padding: 10px 15px;       /* espace intérieur */
-    width: 50%;               /* largeur */
-    max-width: 400px;         /* limite largeur sur grands écrans */
-    border-radius: 20px;      /* coins arrondis */
-    border: none;             /* supprime le contour */
-    font-size: 16px;          /* taille du texte */
-    background-color: #1E1E1E; /* fond sombre */
-    color: white;             /* texte blanc */
-}
-
-#search::placeholder {
-    color: #888;              /* texte indicatif gris */
-}
-
-/* ===== Conteneur artistes ===== */
+/* ===== Artistes (cartes) horizontales ===== */
 .artistes {
-    display: flex;
-    justify-content: center;  /* centre toutes les cartes */
-    flex-wrap: wrap;          /* passe à la ligne automatiquement */
-    gap: 20px;                /* espace entre les cartes */
-    align-items: flex-start;  /* aligne le haut des cartes */
+    display: flex;              /* met les cartes en ligne */
+    flex-wrap: nowrap;          /* pas de passage à la ligne */
+    overflow-x: auto;           /* scroll horizontal si trop de cartes */
+    gap: 20px;                  /* espace entre les cartes */
+    padding-bottom: 10px;       /* un petit espace en bas pour le scroll */
 }
 
-/* ===== Carte artiste ===== */
+.artistes::-webkit-scrollbar {
+    height: 8px;                /* barre de scroll plus fine */
+}
+
+.artistes::-webkit-scrollbar-thumb {
+    background-color: #1DB954;  /* couleur verte Spotify */
+    border-radius: 4px;
+}
+
 .artiste {
     background-color: #1E1E1E;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     padding: 15px;
-    width: 220px;             /* largeur fixe des cartes */
+    width: 250px;               /* largeur fixe pour un meilleur alignement */
+    min-width: 250px;           /* assure que toutes les cartes aient la même taille */
     text-align: center;
+    flex-shrink: 0;             /* empêche les cartes de rétrécir */
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.artiste:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    border: 1px solid #1DB954;
-}
-
-/* ===== Image artiste ===== */
 .artiste img {
-    width: 100%;
+    width: 100%;                /* image prend toute la largeur de la carte */
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-/* ===== Liste albums ===== */
-.albums {
+.album-cover {
+    width: 40px;                /* taille des pochettes d'album */
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.artiste ul.albums {
     list-style: none;
     padding: 0;
-    margin-top: 10px;
+    margin: 5px 0 0 0;
 }
 
-/* ===== Ligne album ===== */
-.albums li {
+.artiste ul.albums li {
     display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    font-size: 14px;
-    background-color: #181818;
-    padding: 5px;
-    border-radius: 6px;
-}
-
-/* ===== Image album (ronde) ===== */
-.album-cover {
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    transition: transform 0.3s;
-}
-
-.album-cover:hover {
-    transform: scale(1.2);
-}
-
-/* ===== Footer ===== */
-footer {
-    background-color: #1E1E1E;
-    text-align: center;
-    padding: 30px 15px;
-    margin-top: 40px;
+    align-items: center;        /* aligne l'image et le texte */
+    margin-bottom: 5px;
 }

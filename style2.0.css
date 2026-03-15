@@ -17,8 +17,8 @@ header {
 }
 
 header img.logo {
-    height: 50px;
-    max-width: 180px;
+    height: 40px;
+    max-width: 150px;
 }
 
 /* ===== Main ===== */
@@ -33,26 +33,13 @@ h2 {
     margin: 40px 0 20px 0;
 }
 
-/* ===== Barre de recherche ===== */
-.search-container {
-    text-align: center;
-    margin: 20px 0;
-}
-
-#search {
-    padding: 10px 15px;
-    width: 50%;
-    border-radius: 20px;
-    border: none;
-    font-size: 16px;
-}
-
 /* ===== Conteneur artistes ===== */
 .artistes {
     display: flex;
-    justify-content: flex-start;  /* alignement horizontal de base */
-    gap: 20px;
-    flex-wrap: wrap;              /* passe à la ligne automatiquement */
+    justify-content: center;  /* centre toutes les cartes */
+    flex-wrap: wrap;          /* passe à la ligne automatiquement */
+    gap: 20px;                /* espace entre les cartes */
+    align-items: flex-start;  /* aligne le haut des cartes */
 }
 
 /* ===== Carte artiste ===== */
@@ -61,8 +48,7 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     padding: 15px;
-    width: 220px;                 /* largeur harmonisée */
-    min-width: 200px;
+    width: 220px;             /* largeur fixe des cartes */
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -98,7 +84,7 @@ h2 {
     border-radius: 6px;
 }
 
-/* ===== Image album (ronde comme Spotify) ===== */
+/* ===== Image album (ronde) ===== */
 .album-cover {
     width: 45px;
     height: 45px;

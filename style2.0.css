@@ -1,92 +1,98 @@
 /* ===== Style général ===== */
 body {
-    background-color: #121212; /* fond sombre global */
+    background-color: #121212;
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-
-    display: flex;            /* Flexbox pour footer en bas */
-    flex-direction: column;
-    min-height: 100vh;        /* prend toute la hauteur de la fenêtre */
 }
 
 /* ===== Header ===== */
 header {
-    background-color: #000000;  /* même noir que le logo */
+    background-color: #000000;
     padding: 10px 20px;
-    display: flex;                   
-    align-items: center;             
-    justify-content: space-between;  
-    flex-wrap: wrap;                 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 header img.logo {
-    height: 40px;                    /* réduit la taille du logo */
-    max-width: 150px;                /* largeur maximale */
-}
-
-/* Menu de navigation */
-nav {
-    margin-top: 0;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #1DB954;                  /* vert Spotify au survol */
+    height: 40px;
+    max-width: 150px;
 }
 
 /* ===== Main ===== */
 main {
-    flex: 1;                         /* prend tout l'espace restant avant le footer */
     padding: 20px;
 }
 
+/* ===== Titres catégories ===== */
 h2 {
-    margin-bottom: 20px;
-    font-size: 28px;
+    text-align: center;
+    font-size: 32px;
+    margin: 40px 0 20px 0;
 }
 
-/* ===== Artistes (cartes) ===== */
+/* ===== Conteneur artistes ===== */
 .artistes {
-    display: flex;                    
-    justify-content: center;   /* centre les cartes horizontalement */
-    gap: 20px;                 /* espace entre les cartes */
-    flex-wrap: wrap;                  
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
+/* ===== Carte artiste ===== */
 .artiste {
-    background-color: #1E1E1E;        
-    border-radius: 10px;              
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     padding: 15px;
-    width: 180px;                     
+    width: 220px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.artiste:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* ===== Image artiste ===== */
 .artiste img {
-    width: 100%;                       
+    width: 100%;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.artiste:hover {
-    transform: scale(1.05);           
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+/* ===== Liste albums ===== */
+.albums {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* ===== Ligne album ===== */
+.albums li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+/* ===== Image album (RONDE comme Spotify) ===== */
+.album-cover {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 /* ===== Footer ===== */
 footer {
-    background-color: #000000; /* même noir que le header/logo */
+    background-color: #1E1E1E;
     text-align: center;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 30px 15px;
+    margin-top: 40px;
 }

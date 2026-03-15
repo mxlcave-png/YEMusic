@@ -1,56 +1,92 @@
-/* ===== Artistes (cartes) horizontales ===== */
+/* ===== Style général ===== */
+body {
+    background-color: #121212; /* fond sombre global */
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    display: flex;            /* Flexbox pour footer en bas */
+    flex-direction: column;
+    min-height: 100vh;        /* prend toute la hauteur de la fenêtre */
+}
+
+/* ===== Header ===== */
+header {
+    background-color: #000000;  /* même noir que le logo */
+    padding: 10px 20px;
+    display: flex;                   
+    align-items: center;             
+    justify-content: space-between;  
+    flex-wrap: wrap;                 
+}
+
+header img.logo {
+    height: 40px;                    /* réduit la taille du logo */
+    max-width: 150px;                /* largeur maximale */
+}
+
+/* Menu de navigation */
+nav {
+    margin-top: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #1DB954;                  /* vert Spotify au survol */
+}
+
+/* ===== Main ===== */
+main {
+    flex: 1;                         /* prend tout l'espace restant avant le footer */
+    padding: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* ===== Artistes (cartes) ===== */
 .artistes {
-    display: flex;              /* met les cartes en ligne */
-    flex-wrap: nowrap;          /* pas de passage à la ligne */
-    overflow-x: auto;           /* scroll horizontal si trop de cartes */
-    gap: 20px;                  /* espace entre les cartes */
-    padding-bottom: 10px;       /* un petit espace en bas pour le scroll */
-}
-
-.artistes::-webkit-scrollbar {
-    height: 8px;                /* barre de scroll plus fine */
-}
-
-.artistes::-webkit-scrollbar-thumb {
-    background-color: #1DB954;  /* couleur verte Spotify */
-    border-radius: 4px;
+    display: flex;                    
+    justify-content: center;   /* centre les cartes horizontalement */
+    gap: 20px;                 /* espace entre les cartes */
+    flex-wrap: wrap;                  
 }
 
 .artiste {
-    background-color: #1E1E1E;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: #1E1E1E;        
+    border-radius: 10px;              
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
     padding: 15px;
-    width: 250px;               /* largeur fixe pour un meilleur alignement */
-    min-width: 250px;           /* assure que toutes les cartes aient la même taille */
+    width: 180px;                     
     text-align: center;
-    flex-shrink: 0;             /* empêche les cartes de rétrécir */
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .artiste img {
-    width: 100%;                /* image prend toute la largeur de la carte */
+    width: 100%;                       
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.album-cover {
-    width: 40px;                /* taille des pochettes d'album */
-    height: 40px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 10px;
-    vertical-align: middle;
+.artiste:hover {
+    transform: scale(1.05);           
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
 }
 
-.artiste ul.albums {
-    list-style: none;
-    padding: 0;
-    margin: 5px 0 0 0;
-}
-
-.artiste ul.albums li {
-    display: flex;
-    align-items: center;        /* aligne l'image et le texte */
-    margin-bottom: 5px;
+/* ===== Footer ===== */
+footer {
+    background-color: #000000; /* même noir que le header/logo */
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
 }

@@ -9,11 +9,11 @@ body {
 
 /* ===== Header ===== */
 header {
-    background-color: #000000; /* noir identique au logo */
+    background-color: #000000;
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 header img.logo {
@@ -26,36 +26,30 @@ main {
     padding: 20px;
 }
 
-/* ===== Titres de catégorie ===== */
+/* ===== Titres catégories ===== */
 h2 {
-    text-align: center;      /* centre la catégorie */
+    text-align: center;
     font-size: 32px;
     margin: 40px 0 20px 0;
-    color: #ffffff;
 }
 
-/* ===== Artistes (cartes) ===== */
+/* ===== Conteneur artistes ===== */
 .artistes {
     display: flex;
-    justify-content: center; /* centre les cartes horizontalement */
-    gap: 20px;               /* espace constant entre cartes */
-    flex-wrap: wrap;          /* retour à la ligne si écran trop petit */
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
+/* ===== Carte artiste ===== */
 .artiste {
     background-color: #1E1E1E;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     padding: 15px;
-    width: 220px;             /* largeur carte ajustée */
+    width: 220px;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.artiste img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
 }
 
 .artiste:hover {
@@ -63,32 +57,42 @@ h2 {
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* ===== Albums dans les cartes ===== */
+/* ===== Image artiste ===== */
+.artiste img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* ===== Liste albums ===== */
 .albums {
     list-style: none;
     padding: 0;
-    margin: 10px 0 0 0;
-    text-align: left;
+    margin-top: 10px;
 }
 
+/* ===== Ligne album ===== */
 .albums li {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+    font-size: 14px;
 }
 
-.albums li img.album-cover {
-    width: 40px;  /* taille des images d’album */
-    height: 40px;
+/* ===== Image album (RONDE comme Spotify) ===== */
+.album-cover {
+    width: 45px;
+    height: 45px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 50%;
     margin-right: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 /* ===== Footer ===== */
 footer {
     background-color: #1E1E1E;
     text-align: center;
-    padding: 30px 15px;  /* plus d’espace pour le footer */
+    padding: 30px 15px;
     margin-top: 40px;
 }

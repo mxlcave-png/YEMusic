@@ -1,6 +1,14 @@
 /* ===== Style général ===== */
+/* ===== Fond avec lignes rappelant le logo ===== */
 body {
-    background: linear-gradient(135deg, #50C878, #1DB954); /* vert émeraude clair vers vert Spotify */
+    background-color: #121212; /* fond sombre de base */
+    background-image: repeating-linear-gradient(
+        45deg,               /* angle des lignes */
+        #50C878,             /* couleur 1 du dégradé logo */
+        #50C878 2px,         /* épaisseur de la ligne */
+        transparent 2px,     /* espace entre les lignes */
+        transparent 20px     /* distance avant la ligne suivante */
+    );
     color: white;
     font-family: Arial, sans-serif;
     margin: 0;

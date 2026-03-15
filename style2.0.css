@@ -27,16 +27,6 @@ nav {
     gap: 15px;
 }
 
-.btn-artistes
-    display: inline-block;
-    padding: 8px 16px;           
-    background: #1DB954;         
-    color: white;                
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 20px;        
-    transition: background 0.3s, transform 0.2s;
-}
 
 .btn-artistes:hover {
     background: #1ed760;         

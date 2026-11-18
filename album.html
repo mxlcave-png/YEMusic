@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Album - YEMusic</title>
+<link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="images/logo rond.png">
+</head>
+<body>
+
+<header>
+    <a href="index2.html">
+        <img src="images/logo rond.png" class="logo" alt="Logo YEMusic">
+    </a>
+    <nav>
+        <a href="artistes2.html">Artistes</a>
+        <a href="favoris.html">&#9829; Favoris</a>
+        <a href="playlists.html">Playlists</a>
+        <a href="recherche.html">&#128269; Recherche</a>
+    </nav>
+</header>
+
+<main class="page-artiste">
+
+    <div class="nav-retour">
+        <a href="artistes2.html" id="lien-retour-artiste" class="retour-artistes">&larr; Retour</a>
+        <a href="artistes2.html" class="retour-artistes">Tous les artistes</a>
+    </div>
+
+    <section class="hero-artiste">
+        <img id="album-pochette" src="" alt="">
+        <div>
+            <p class="genre">Album</p>
+            <h1 id="album-titre">Album</h1>
+            <p class="meta-album" id="album-meta"></p>
+        </div>
+    </section>
+
+    <section class="section-artiste" id="section-lecteur">
+        <h2>Écouter</h2>
+
+        <div class="lecteur-perso">
+            <div class="lp-infos">
+                <img id="lp-pochette" src="" alt="">
+                <div>
+                    <p id="lp-titre">Choisis un titre</p>
+                    <p class="lp-artiste" id="lp-artiste">Artiste</p>
+                </div>
+            </div>
+            <div class="lp-centre">
+                <div class="lp-boutons">
+                    <button id="lp-shuffle" aria-label="Lecture aléatoire" aria-pressed="false">&#8644;</button>
+                    <button id="lp-prev" aria-label="Titre précédent">&#9198;</button>
+                    <button id="lp-play" aria-label="Lecture / pause">&#9654;</button>
+                    <button id="lp-next" aria-label="Titre suivant">&#9197;</button>
+                </div>
+                <div class="lp-progress">
+                    <span id="lp-pos">0:00</span>
+                    <input type="range" id="lp-barre" min="0" max="100" value="0">
+                    <span id="lp-dur">0:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="lecteur">
+            <div id="embed-spotify"></div>
+        </div>
+        <p class="note-lecteur">Clique sur un titre pour le lancer. Lecteur officiel Spotify : l'écoute complète demande d'être connecté à Spotify, sinon ce sont des extraits.</p>
+    </section>
+
+    <section class="section-artiste">
+        <h2>Titres</h2>
+        <p class="note-lecteur" id="message-vide" hidden></p>
+        <ol class="tracklist" id="tracklist"></ol>
+    </section>
+
+</main>
+
+<footer>
+    <p>Projet SNT - Yves-edrcik MONLOUIS - YEMusic - 2026</p>
+</footer>
+
+<script src="albums-data.js"></script>
+<script src="favoris.js"></script>
+<script src="playlists.js"></script>
+<script src="lecteur.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+
+// ----- infos de l'album : données du fichier, sinon celles de la carte cliquée -----
+const params  = new URLSearchParams(location.search);
+const cle     = params.get('a') || '';
+const donnees = (window.ALBUMS && window.ALBUMS[cle]) || {};
+const titreComplet = params.get('t') || 'Album';
+const artiste = params.get('n') || 'Artiste';
+let sauvees = {};
+try { sauvees = JSON.parse(localStorage.getItem('yemusic_pochettes')) || {}; } catch (e) {}
+const pochette = donnees.pochette || params.get('i') || sauvees[cle] || '';
+const retour = /^[\w.\-]+\.html$/.test(params.get('r') || '') ? params.get('r') : 'artistes2.html';
+const liste = donnees.titres || [];
+
+// "Anniversary (2020)" -> nom "Anniversary" + info "2020"
+let nom = titreComplet, info = '';
+const m = titreComplet.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
+if (m) { nom = m[1]; info = m[2]; }
+const annee = donnees.annee || info;
+
+document.title = nom + ' - ' + artiste + ' - YEMusic';
+$('album-titre').textContent = nom;
+$('album-meta').textContent = [artiste, annee, liste.length ? liste.length + ' titres' : ''].filter(Boolean).join(' · ');
+['album-pochette', 'lp-pochette'].forEach((id) => {
+    if (pochette) $(id).src = pochette;
+    $(id).alt = nom;
+});
+$('lp-artiste').textContent = artiste;
+$('lien-retour-artiste').href = retour;
+$('lien-retour-artiste').textContent = '← Retour à ' + artiste;
+
+// ----- liste des titres -----
+const ol = $('tracklist');
+liste.forEach((p, i) => {
+    const li = document.createElement('li');
+    const num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = i + 1;
+    const t = document.createElement('span');
+    t.className = 'titre';
+    t.textContent = p[0];
+    li.append(num, t);
+    if (p[2]) {
+        const d = document.createElement('span');
+        d.className = 'duree';
+        d.textContent = p[2];
+        li.append(d);
+    }
+    const trouve = String(p[1] || '').match(/[A-Za-z0-9]{22}/);
+        if (trouve) {
+        li.dataset.id = trouve[0];
+        li.dataset.artiste = artiste;
+        li.dataset.album = nom;
+        li.dataset.pochette = pochette;
+        const piste = {
+            id: trouve[0],
+            titre: p[0],
+            artiste: artiste,
+            album: nom,
+            pochette: pochette,
+            duree: p[2] || ''
+        };
+        li.append(creerCoeur(piste), creerBoutonAjout(piste));
+    }
+    ol.append(li);
+});
+
+// ----- source de départ du lecteur Spotify -----
+const premier = Array.from(ol.children).find((li) => li.dataset.id);
+const idAlbum = (String(donnees.spotifyAlbum || '').match(/[A-Za-z0-9]{22}/) || [])[0];
+let uriDepart = null;
+if (idAlbum) uriDepart = 'spotify:album:' + idAlbum;
+else if (premier) uriDepart = 'spotify:track:' + premier.dataset.id;
+
+if (!liste.length) {
+    $('message-vide').hidden = false;
+    $('message-vide').textContent = "Les titres de cet album n'ont pas encore été ajoutés.";
+} else if (!uriDepart) {
+    $('message-vide').hidden = false;
+    $('message-vide').textContent = "Aucun lien Spotify ajouté pour cet album pour l'instant.";
+}
+if (!uriDepart) $('section-lecteur').hidden = true;
+
+initLecteur(ol, uriDepart);
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script src="transition.js"></script>
+<script src="compte.js"></script>
+</body>
+</html>

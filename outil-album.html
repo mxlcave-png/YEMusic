@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outil albums - YEMusic</title>
+<style>
+    body { font-family: Arial, sans-serif; color: white; margin: 0; padding: 20px; min-height: 100vh;
+           background: linear-gradient(135deg, #8B0000, #FF0040, #FF6A00, #FFC300); }
+    h1 { text-align: center; }
+    .carte { background: rgba(17,14,13,0.92); border-radius: 16px; padding: 20px; max-width: 900px; margin: 0 auto 20px; }
+    .carte h2 { margin-top: 0; font-size: 18px; color: #ffb347; }
+    textarea { width: 100%; box-sizing: border-box; min-height: 130px; background: #1E1E1E; color: white;
+               border: 1px solid #444; border-radius: 10px; padding: 10px; font-family: monospace; font-size: 12px; }
+    input[type=text], select { background: #1E1E1E; color: white; border: 1px solid #444; border-radius: 8px; padding: 8px 10px; margin: 4px 6px 4px 0; }
+    button { border: none; border-radius: 20px; padding: 10px 18px; margin-top: 10px; cursor: pointer; color: white; font-weight: bold;
+             background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347); }
+    .statut { font-size: 13px; opacity: 0.9; margin: 10px 0 0; }
+    .petit { font-size: 13px; opacity: 0.8; }
+    .cle { font-family: monospace; color: #ffb347; word-break: break-all; }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 4px; }
+    td input { width: 100%; box-sizing: border-box; margin: 0; }
+    td:first-child { width: 30px; text-align: right; color: #ffb347; }
+    .resultat-album { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: #1E1E1E;
+                      border-radius: 10px; margin-top: 8px; font-weight: normal; }
+    .resultat-album img { width: 50px; height: 50px; border-radius: 6px; }
+    #pochette img { width: 120px; border-radius: 10px; margin-top: 10px; }
+</style>
+    <link rel="icon" type="image/png" href="images/logo rond.png">
+</head>
+<body>
+
+<h1>Outil : générer la fiche d'un album</h1>
+
+<div class="carte">
+    <h2>1. Quel album ?</h2>
+    <select id="sel-artiste"></select>
+    <select id="sel-album"></select>
+    <input type="text" id="titre-autre" placeholder="Titre exact de la carte" hidden>
+    <input type="text" id="annee" placeholder="Année" size="6">
+    <p class="petit">Clé de l'album (sans l'année) : <span class="cle" id="cle"></span></p>
+    <p class="petit">Si la clé ne correspond pas à celle de l'adresse quand tu cliques sur la carte (<code>?a=...</code>), choisis "Autre" et tape le titre exact de ta carte.</p>
+</div>
+
+<div class="carte">
+    <h2>2. Colle les liens Spotify de l'album</h2>
+    <p class="petit">Dans l'appli Spotify sur ordinateur : ouvre l'album, clique sur un titre, <b>Ctrl+A</b> puis <b>Ctrl+C</b>. Colle ici.</p>
+    <textarea id="liens" placeholder="https://open.spotify.com/track/..."></textarea>
+    <input type="text" id="lien-album" placeholder="Lien de l'album sur Spotify (facultatif)" size="50">
+    <br>
+    <button id="btn-analyser">Analyser les liens</button>
+    <p class="statut" id="statut1"></p>
+</div>
+
+<div class="carte">
+    <h2>3. (Si besoin) Récupérer les noms et durées avec iTunes</h2>
+    <p class="petit">À utiliser si les noms n'ont pas été récupérés à l'étape 2. Vérifie que l'édition correspond à celle de Spotify.</p>
+    <input type="text" id="it-terme" size="40">
+    <button id="btn-it">Chercher</button>
+    <div id="it-resultats"></div>
+    <p class="statut" id="statut2"></p>
+    <div id="pochette"></div>
+</div>
+
+<div class="carte">
+    <h2>4. Vérifie et corrige <span id="compteur" class="petit"></span></h2>
+    <table>
+        <tbody id="corps"></tbody>
+    </table>
+</div>
+
+<div class="carte">
+    <h2>5. Fiche à coller dans albums-data.js</h2>
+    <p class="petit">Colle ce code <b>juste avant la ligne <code>};</code></b> de la fin de <code>albums-data.js</code>.</p>
+    <textarea id="sortie" readonly></textarea>
+    <button id="btn-copier">Copier la fiche</button>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+
+// les albums de ton site : artiste -> titres exacts des cartes
+const SITE = {
+    "Bryson Tiller": ["Trapsoul", "True To Self", "Anniversary (2020)", "Bryson Tiller (2024)", "Solace & The Vices (2025)"],
+    "PartyNextDoor": ["PartyNextDoor 3", "PartyNextDoor 4", "PartyNextDoor Two (2014)", "Partymobile (2020)", "Some Sexy Songs 4 U (2025, avec Drake)"],
+    "Chris Brown": ["F.A.M.E.", "Royalty", "Exclusive (2007)", "Graffiti (2009)", "Fortune (2012)", "X (2014)", "Heartbreak on a Full Moon (2017)", "Indigo (2019)", "Breezy (2022)", "11:11 (2023)", "Brown (2026)"],
+    "Sheltoh": ["No Need for Tears"],
+    "Snoop Dogg": ["Gangsta Grillz", "Tha Last Meal", "Doggystyle (1993)", "Tha Doggfather (1996)", "Da Game Is to Be Sold, Not to Be Told (1998)", "No Limit Top Dogg (1999)", "Paid tha Cost to Be da Bo$$ (2002)", "Rhythm & Gangsta: The Masterpiece (2004)", "Tha Blue Carpet Treatment (2006)", "Ego Trippin' (2008)", "Malice n Wonderland (2009)", "Doggumentary (2011)", "Reincarnated (2013)", "Bush (2015)", "Coolaid (2016)", "Neva Left (2017)", "Bible of Love (2018)", "I Wanna Thank Me (2019)", "From tha Streets 2 tha Suites (2021)", "BODR (2022)", "Missionary (2024, avec Dr. Dre)", "Iz It a Crime? (2025)", "10 Til' Midnight (2026)"],
+    "Kendrick Lamar": ["Good Kid, M.A.A.D City", "DAMN.", "Section.80 (2011)", "To Pimp a Butterfly (2015)", "Mr. Morale & the Big Steppers (2022)", "GNX (2024)"],
+    "Drake": ["Take Care", "Scorpion", "Thank Me Later (2010)", "Nothing Was the Same (2013)", "Views (2016)", "Certified Lover Boy (2021)", "Honestly, Nevermind (2022)", "For All the Dogs (2023)", "Some Sexy Songs 4 U (2025, avec PartyNextDoor)", "Iceman (2026)", "Habibti (2026)", "Maid of Honour (2026)"],
+    "Travis Scott": ["Utopia", "Astroworld", "Rodeo (2015)", "Birds in the Trap Sing McKnight (2016)", "JackBoys 2 (2025, compilation)"],
+    "Niska": ["Commando", "Mr Sal", "Zifukoro (2016)"],
+    "Ninho": ["M.I.L.S 3", "Destin", "Comme prevu (2017)", "Jefe (2021)", "NI (2023)", "GOAT (2024, avec Niska)", "M.I.L.S 4 (2026)"],
+    "Leto": ["100 Visages", "17%", "Jusqu'aux Etoiles (2022, avec Guy2Bezbar)", "Capitaine fait de l'art (2024)", "LIFE (2025)"],
+    "Damso": ["Batterie Faible", "QALF", "Ipseite (2017)", "Lithopedion (2018)", "J'ai Menti. (2024)", "BEYAH (2025)"]
+};
+Object.keys(SITE).forEach((a) => {
+    ((window.ALBUMS_EXTRA || {})[a] || []).forEach((e) => {
+        if (!SITE[a].includes(e.t)) SITE[a].push(e.t);
+    });
+});
+
+let pistes = [];
+
+// même règle que dans liens-albums.js
+function slug(t) {
+    return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// enlève la parenthèse finale : "Anniversary (2020)" -> "Anniversary"
+function sansParentheses(t) {
+    return t.replace(/\s*\([^)]*\)\s*$/, '');
+}
+
+function formatMs(ms) {
+    const s = Math.round(ms / 1000);
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+}
+
+function extraireIds(texte) {
+    const ids = [];
+    const re = /(?:open\.spotify\.com\/(?:intl-[a-z]+\/)?track\/|spotify:track:)([A-Za-z0-9]{22})/g;
+    let m;
+    while ((m = re.exec(texte)) !== null) ids.push(m[1]);
+    return ids;
+}
+
+function infosAlbum() {
+    const artiste = $('sel-artiste').value;
+    const titre = $('sel-album').value === '__autre__' ? $('titre-autre').value.trim() : $('sel-album').value;
+    return { artiste: artiste, titre: titre };
+}
+
+// ----- menus -----
+function remplirAlbums() {
+    const artiste = $('sel-artiste').value;
+    const sel = $('sel-album');
+    sel.innerHTML = '';
+    SITE[artiste].forEach((t) => {
+        const o = document.createElement('option');
+        o.value = t;
+        o.textContent = t;
+        sel.appendChild(o);
+    });
+    const autre = document.createElement('option');
+    autre.value = '__autre__';
+    autre.textContent = 'Autre (taper le titre)';
+    sel.appendChild(autre);
+    changerAlbum();
+}
+
+function changerAlbum() {
+    const autre = $('sel-album').value === '__autre__';
+    $('titre-autre').hidden = !autre;
+    const { artiste, titre } = infosAlbum();
+    const m = titre.match(/\((\d{4})/);
+    $('annee').value = m ? m[1] : '';
+    $('it-terme').value = (artiste + ' ' + sansParentheses(titre)).trim();
+    genererSortie();
+}
+
+Object.keys(SITE).forEach((a) => {
+    const o = document.createElement('option');
+    o.value = a;
+    o.textContent = a;
+    $('sel-artiste').appendChild(o);
+});
+$('sel-artiste').addEventListener('change', remplirAlbums);
+$('sel-album').addEventListener('change', changerAlbum);
+$('titre-autre').addEventListener('input', genererSortie);
+$('annee').addEventListener('input', genererSortie);
+$('lien-album').addEventListener('input', genererSortie);
+
+// ----- tableau + fiche -----
+function genererSortie() {
+    const { artiste, titre } = infosAlbum();
+    const cle = slug(artiste + ' ' + sansParentheses(titre));
+    $('cle').textContent = cle;
+
+    if (!pistes.length) { $('sortie').value = ''; return; }
+
+    const annee = $('annee').value.trim();
+    const idAlbum = ($('lien-album').value.match(/[A-Za-z0-9]{22}/) || [])[0];
+
+    const lignes = pistes.map((p) =>
+        '            [' + JSON.stringify(p.titre || '') + ', "' + (p.id || '') + '", "' + (p.duree || '') + '"]'
+    );
+
+    let s = '    ' + JSON.stringify(cle) + ': {\n';
+    if (annee) s += '        annee: ' + JSON.stringify(annee) + ',\n';
+    if (idAlbum) s += '        spotifyAlbum: ' + JSON.stringify(idAlbum) + ',\n';
+    s += '        titres: [\n' + lignes.join(',\n') + '\n        ]\n    },';
+    $('sortie').value = s;
+}
+
+function afficherTable() {
+    const corps = $('corps');
+    corps.innerHTML = '';
+    pistes.forEach((p, i) => {
+        const tr = document.createElement('tr');
+
+        const tdN = document.createElement('td');
+        tdN.textContent = i + 1;
+
+        const tdT = document.createElement('td');
+        const inT = document.createElement('input');
+        inT.type = 'text';
+        inT.value = p.titre;
+        inT.placeholder = p.id ? 'Nom du titre' : 'Nom du titre (pas de lien Spotify)';
+        inT.addEventListener('input', () => { p.titre = inT.value; genererSortie(); });
+        tdT.appendChild(inT);
+
+        const tdD = document.createElement('td');
+        tdD.style.width = '80px';
+        const inD = document.createElement('input');
+        inD.type = 'text';
+        inD.value = p.duree;
+        inD.placeholder = 'm:ss';
+        inD.addEventListener('input', () => { p.duree = inD.value; genererSortie(); });
+        tdD.appendChild(inD);
+
+        tr.append(tdN, tdT, tdD);
+        corps.appendChild(tr);
+    });
+    $('compteur').textContent = '(' + pistes.length + ' titre(s))';
+    genererSortie();
+}
+
+// ----- liens Spotify + noms via oEmbed -----
+async function titreOembed(id) {
+    const url = 'https://open.spotify.com/oembed?url=' +
+                encodeURIComponent('https://open.spotify.com/track/' + id);
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    return j.title;
+}
+
+$('btn-analyser').addEventListener('click', async () => {
+    const ids = extraireIds($('liens').value);
+    if (!ids.length) {
+        $('statut1').textContent = "Aucun lien de morceau trouvé. Vérifie que tu as bien copié les titres (Ctrl+A puis Ctrl+C sur la liste).";
+        return;
+    }
+    pistes = ids.map((id) => ({ id: id, titre: '', duree: '' }));
+    afficherTable();
+    $('statut1').textContent = ids.length + ' lien(s) trouvé(s). Récupération des noms...';
+
+    const resultats = await Promise.allSettled(pistes.map((p) => titreOembed(p.id)));
+    let ok = 0;
+    resultats.forEach((r, i) => {
+        if (r.status === 'fulfilled' && r.value && !pistes[i].titre) {
+            pistes[i].titre = r.value;
+            ok++;
+        }
+    });
+    afficherTable();
+
+    if (ok === pistes.length) {
+        $('statut1').textContent = 'Noms récupérés pour tous les titres. Vérifie le tableau, puis copie la fiche en bas.';
+    } else if (ok > 0) {
+        $('statut1').textContent = 'Noms récupérés pour ' + ok + '/' + pistes.length + '. Complète le reste à la main ou avec l\'étape 3.';
+    } else {
+        $('statut1').textContent = "Les noms n'ont pas pu être récupérés automatiquement. Utilise l'étape 3 (iTunes) ou tape les noms à la main : les liens sont déjà bons.";
+    }
+});
+
+// ----- iTunes (JSONP pour éviter les blocages) -----
+function jsonp(url) {
+    return new Promise((resolve, reject) => {
+        const nom = 'cb_' + Math.random().toString(36).slice(2);
+        const s = document.createElement('script');
+        const timer = setTimeout(() => { nettoyer(); reject(new Error('Délai dépassé')); }, 10000);
+        function nettoyer() { clearTimeout(timer); delete window[nom]; s.remove(); }
+        window[nom] = (data) => { nettoyer(); resolve(data); };
+        s.onerror = () => { nettoyer(); reject(new Error('Erreur réseau')); };
+        s.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + nom;
+        document.head.appendChild(s);
+    });
+}
+
+$('btn-it').addEventListener('click', async () => {
+    const terme = $('it-terme').value.trim();
+    if (!terme) return;
+    $('statut2').textContent = 'Recherche...';
+    $('it-resultats').innerHTML = '';
+    try {
+        const data = await jsonp('https://itunes.apple.com/search?entity=album&limit=10&term=' + encodeURIComponent(terme));
+        if (!data.results || !data.results.length) {
+            $('statut2').textContent = 'Aucun résultat. Essaie avec moins de mots.';
+            return;
+        }
+        $('statut2').textContent = 'Clique sur la bonne édition :';
+        data.results.forEach((a) => {
+            const b = document.createElement('button');
+            b.className = 'resultat-album';
+            const img = document.createElement('img');
+            img.src = a.artworkUrl100;
+            const t = document.createElement('span');
+            t.textContent = a.artistName + ' - ' + a.collectionName + ' (' + (a.releaseDate || '').slice(0, 4) + ', ' + a.trackCount + ' titres)';
+            b.append(img, t);
+            b.addEventListener('click', () => choisirAlbum(a));
+            $('it-resultats').appendChild(b);
+        });
+    } catch (e) {
+        $('statut2').textContent = 'iTunes ne répond pas (' + e.message + '). Tape les noms à la main dans le tableau.';
+    }
+});
+
+async function choisirAlbum(album) {
+    $('statut2').textContent = 'Chargement des titres...';
+    try {
+        const data = await jsonp('https://itunes.apple.com/lookup?entity=song&id=' + album.collectionId);
+        const titres = data.results
+            .filter((r) => r.wrapperType === 'track')
+            .sort((a, b) => (a.discNumber - b.discNumber) || (a.trackNumber - b.trackNumber));
+
+        if (!pistes.length) {
+            pistes = titres.map(() => ({ id: '', titre: '', duree: '' }));
+        }
+        titres.forEach((t, i) => {
+            if (pistes[i]) {
+                pistes[i].titre = t.trackName;
+                pistes[i].duree = formatMs(t.trackTimeMillis);
+            }
+        });
+        if (!$('annee').value) $('annee').value = (album.releaseDate || '').slice(0, 4);
+        afficherTable();
+
+        let msg = 'Titres remplis depuis iTunes.';
+        if (titres.length !== pistes.length) {
+            msg += ' Attention : iTunes a ' + titres.length + ' titres et tu en as ' + pistes.length +
+                   ' : l\'ordre ou l\'édition ne correspondent peut-être pas, vérifie bien le tableau.';
+        }
+        $('statut2').textContent = msg;
+
+        const grande = album.artworkUrl100.replace('100x100bb', '600x600bb');
+        $('pochette').innerHTML = '';
+        const img = document.createElement('img');
+        img.src = grande;
+        const p = document.createElement('p');
+        p.className = 'petit';
+        p.textContent = 'Pochette trouvée (facultatif) : ' + grande;
+        $('pochette').append(img, p);
+    } catch (e) {
+        $('statut2').textContent = 'Impossible de charger les titres (' + e.message + ').';
+    }
+}
+
+// ----- copier -----
+$('btn-copier').addEventListener('click', async () => {
+    const zone = $('sortie');
+    try {
+        await navigator.clipboard.writeText(zone.value);
+    } catch (e) {
+        zone.select();
+        document.execCommand('copy');
+    }
+    $('btn-copier').textContent = 'Copié !';
+    setTimeout(() => { $('btn-copier').textContent = 'Copier la fiche'; }, 1500);
+});
+
+remplirAlbums();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playlists - YEMusic</title>
+<link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="images/logo rond.png">
+</head>
+<body>
+
+<header>
+    <a href="index2.html">
+        <img src="images/logo rond.png" class="logo" alt="Logo YEMusic">
+    </a>
+    <nav>
+        <a href="artistes2.html">Artistes</a>
+        <a href="favoris.html">&#9829; Favoris</a>
+        <a href="playlists.html">Playlists</a>
+        <a href="recherche.html">&#128269; Recherche</a>
+    </nav>
+</header>
+
+<main class="page-artiste">
+
+    <!-- VUE 1 : toutes les playlists -->
+    <div id="vue-liste" hidden>
+        <div class="nav-retour">
+            <a href="index2.html" class="retour-artistes">&larr; Accueil</a>
+        </div>
+        <h1 class="titre-page">Mes playlists</h1>
+        <button class="btn-vider" id="btn-nouvelle">+ Nouvelle playlist</button>
+        <p class="note-lecteur" id="liste-vide" hidden>Tu n'as pas encore de playlist. Crée-en une, ou clique sur le + à côté d'un titre dans un album.</p>
+        <div class="grille-playlists" id="grille"></div>
+    </div>
+
+    <!-- VUE 2 : une playlist -->
+    <div id="vue-playlist" hidden>
+        <div class="nav-retour">
+            <a href="playlists.html" class="retour-artistes">&larr; Mes playlists</a>
+            <a href="index2.html" class="retour-artistes">Accueil</a>
+        </div>
+
+        <h1 class="titre-page" id="pl-nom">Playlist</h1>
+        <p class="note-lecteur" id="pl-compteur"></p>
+        <div class="barre-actions">
+            <button class="btn-vider" id="btn-renommer">Renommer</button>
+            <button class="btn-vider" id="btn-supprimer">Supprimer la playlist</button>
+        </div>
+
+        <section class="section-artiste" id="section-lecteur">
+            <h2>Écouter</h2>
+
+            <div class="lecteur-perso">
+                <div class="lp-infos">
+                    <img id="lp-pochette" src="" alt="">
+                    <div>
+                        <p id="lp-titre">Choisis un titre</p>
+                        <p class="lp-artiste" id="lp-artiste">Artiste</p>
+                    </div>
+                </div>
+                <div class="lp-centre">
+                    <div class="lp-boutons">
+                        <button id="lp-shuffle" aria-label="Lecture aléatoire" aria-pressed="false">&#8644;</button>
+                        <button id="lp-prev" aria-label="Titre précédent">&#9198;</button>
+                        <button id="lp-play" aria-label="Lecture / pause">&#9654;</button>
+                        <button id="lp-next" aria-label="Titre suivant">&#9197;</button>
+                    </div>
+                    <div class="lp-progress">
+                        <span id="lp-pos">0:00</span>
+                        <input type="range" id="lp-barre" min="0" max="100" value="0">
+                        <span id="lp-dur">0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lecteur">
+                <div id="embed-spotify"></div>
+            </div>
+        </section>
+
+        <section class="section-artiste">
+            <h2>Titres</h2>
+            <p class="note-lecteur" id="pl-vide" hidden>Cette playlist est vide. Ouvre un album et clique sur le + à côté d'un titre pour l'ajouter ici.</p>
+            <ol class="tracklist" id="tracklist"></ol>
+        </section>
+    </div>
+
+</main>
+
+<footer>
+    <p>Projet SNT - Yves-edrcik MONLOUIS - YEMusic - 2026</p>
+</footer>
+
+<script src="favoris.js"></script>
+<script src="playlists.js"></script>
+<script src="lecteur.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+
+const params = new URLSearchParams(location.search);
+const pl = params.get('p') ? trouverPlaylist(params.get('p')) : null;
+
+if (pl) afficherPlaylist(pl);
+else afficherListe();
+
+// ----- vue : toutes les playlists -----
+function afficherListe() {
+    $('vue-liste').hidden = false;
+    const liste = lirePlaylists();
+    const grille = $('grille');
+    grille.innerHTML = '';
+
+    $('liste-vide').hidden = liste.length > 0;
+
+    liste.forEach((p) => {
+        const lien = document.createElement('a');
+        lien.className = 'carte-playlist';
+        lien.href = 'playlists.html?p=' + encodeURIComponent(p.id);
+
+        const premier = p.titres.find((t) => t.pochette);
+        if (premier) {
+            const img = document.createElement('img');
+            img.src = premier.pochette;
+            img.alt = '';
+            lien.append(img);
+        } else {
+            const vide = document.createElement('div');
+            vide.className = 'pochette-vide';
+            vide.textContent = '\u266A';
+            lien.append(vide);
+        }
+
+        const nom = document.createElement('h3');
+        nom.textContent = p.nom;
+        const nb = document.createElement('p');
+        nb.textContent = p.titres.length + ' titre(s)';
+        lien.append(nom, nb);
+        grille.append(lien);
+    });
+
+    $('btn-nouvelle').addEventListener('click', () => {
+        const nom = prompt('Nom de la playlist ?');
+        if (nom && nom.trim()) {
+            const nouvelle = creerPlaylist(nom.trim());
+            location.href = 'playlists.html?p=' + encodeURIComponent(nouvelle.id);
+        }
+    });
+}
+
+// ----- vue : une playlist -----
+function afficherPlaylist(p) {
+    $('vue-playlist').hidden = false;
+    document.title = p.nom + ' - YEMusic';
+    $('pl-nom').textContent = p.nom;
+    $('pl-compteur').textContent = p.titres.length + ' titre(s)';
+
+    $('btn-renommer').addEventListener('click', () => {
+        const nom = prompt('Nouveau nom ?', p.nom);
+        if (nom && nom.trim()) {
+            renommerPlaylist(p.id, nom.trim());
+            location.reload();
+        }
+    });
+
+    $('btn-supprimer').addEventListener('click', () => {
+        if (confirm('Supprimer la playlist "' + p.nom + '" ?')) {
+            supprimerPlaylist(p.id);
+            location.href = 'playlists.html';
+        }
+    });
+
+    const ol = $('tracklist');
+
+    if (!p.titres.length) {
+        $('pl-vide').hidden = false;
+        $('section-lecteur').hidden = true;
+        return;
+    }
+
+    p.titres.forEach((f, i) => {
+        const li = document.createElement('li');
+        li.dataset.id = f.id;
+        li.dataset.artiste = f.artiste || '';
+        li.dataset.pochette = f.pochette || '';
+
+        const num = document.createElement('span');
+        num.className = 'num';
+        num.textContent = i + 1;
+
+        const t = document.createElement('span');
+        t.className = 'titre';
+        t.textContent = f.titre;
+
+        const s = document.createElement('span');
+        s.className = 'sous-titre';
+        s.textContent = [f.artiste, f.album].filter(Boolean).join(' · ');
+
+        li.append(num, t, s);
+
+        if (f.duree) {
+            const d = document.createElement('span');
+            d.className = 'duree';
+            d.textContent = f.duree;
+            li.append(d);
+        }
+
+        // bouton retirer / remettre
+        const btn = document.createElement('button');
+        btn.className = 'btn-retirer';
+        btn.type = 'button';
+        btn.textContent = '\u2715';
+        btn.setAttribute('aria-label', 'Retirer de la playlist');
+        let retire = false;
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            retire = !retire;
+            if (retire) retirerDePlaylist(p.id, f.id);
+            else ajouterAPlaylist(p.id, f);
+            li.classList.toggle('retire', retire);
+            btn.textContent = retire ? '\u21BA' : '\u2715';
+            btn.setAttribute('aria-label', retire ? 'Remettre dans la playlist' : 'Retirer de la playlist');
+        });
+
+        li.append(creerCoeur(f), btn);
+        ol.append(li);
+    });
+
+    $('lp-pochette').src = p.titres[0].pochette || '';
+    $('lp-artiste').textContent = p.titres[0].artiste || '';
+
+    initLecteur(ol, 'spotify:track:' + p.titres[0].id);
+}
+</script>
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+<script src="transition.js"></script>
+<script src="compte.js"></script>
+</body>
+</html>

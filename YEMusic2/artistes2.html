@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Artistes - YEMusic</title>
+<link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="images/logo rond.png">
+</head>
+
+<body>
+
+<header>
+    <a href="index2.html">
+        <img src="images/logo rond.png" class="logo" alt="Logo YEMusic">
+    </a>
+<nav>
+    <a href="artistes2.html">Artistes</a>
+    <a href="favoris.html">&#9829; Favoris</a>
+    <a href="playlists.html">Playlists</a>
+    <a href="recherche.html">&#128269; Recherche</a>
+</nav>
+</header>
+
+<input
+    type="text"
+    id="recherche"
+    placeholder="Rechercher un artiste..."
+    onkeyup="rechercherArtiste()"
+    class="barre-recherche">
+<main>
+
+    <section class="categorie">
+        <h2>R&B</h2>
+        <div class="artistes">
+            <a class="lien-artiste" href="artiste-bryson-tiller.html">
+            <div class="artiste">
+                <img src="images/bryson tyler.jpg" alt="Bryson Tiller">
+                <h3>Bryson Tiller</h3>
+                <p>R&B</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/trapsoul.jpg" alt="Trapsoul">
+                        <div class="album-info">
+                            <p class="album-name">Trapsoul</p>
+                            <p class="best-track">Best track: Don't</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/true to self.jpg" alt="True To Self">
+                        <div class="album-info">
+                            <p class="album-name">True To Self</p>
+                            <p class="best-track">Best track: Somethin Tells Me</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-partynextdoor.html">
+            <div class="artiste">
+                <img src="images/PartyNextDoor.jpg" alt="PartyNextDoor">
+                <h3>PartyNextDoor</h3>
+                <p>R&B</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/PX3.jpg" alt="PartyNextDoor 3">
+                        <div class="album-info">
+                            <p class="album-name">PartyNextDoor 3</p>
+                            <p class="best-track">Best track:<br>  
+                                Break From Toronto</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/PX4.jpg" alt="PartyNextDoor 4">
+                        <div class="album-info">
+                            <p class="album-name">PartyNextDoor 4</p>
+                            <p class="best-track">Best track:<br>
+                                 Loyal</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-chris-brown.html">
+            <div class="artiste">
+                <img src="images/chris brown.jpg" alt="Chris Brown">
+                <h3>Chris Brown</h3>
+                <p>R&B</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/F.A.M.E..jpg" alt="F.A.M.E.">
+                        <div class="album-info">
+                            <p class="album-name">F.A.M.E.</p>
+                            <p class="best-track">Best track: Yeah 3x</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/Royalty.jpg" alt="Royalty">
+                        <div class="album-info">
+                            <p class="album-name">Royalty</p>
+                            <p class="best-track">Best track: Back to Sleep</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-sheltoh.html">
+            <div class="artiste">
+                <img src="images/sheltoh.jpg" alt="Sheltoh">
+                <h3>Sheltoh</h3>
+                <p>R&B moderne</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/no need to tears.jpg" alt="No Need to Tears">
+                        <div class="album-info">
+                            <p class="album-name">No Need for Tears</p>
+                            <p class="best-track">Best track: Run</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="categorie">
+        <h2>RAP US</h2>
+        <div class="artistes">
+            <a class="lien-artiste" href="artiste-snoop-dogg.html">
+            <div class="artiste">
+                <img src="images/snoop dogg.jpg" alt="Snoop Dogg">
+                <h3>Snoop Dogg</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/gangsta grillz i still got it cover.jpg" alt="Gangsta Grillz">
+                        <div class="album-info">
+                            <p class="album-name">Gangsta Grillz</p>
+                            <p class="best-track">Best track: I Still Got It</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/Tha Last Meal.jpg" alt="Tha Last Meal">
+                        <div class="album-info">
+                            <p class="album-name">Tha Last Meal</p>
+                            <p class="best-track">Best track: Vato</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-kendrick-lamar.html">
+            <div class="artiste">
+                <img src="images/kendrick lamar.jpg" alt="Kendrick Lamar">
+                <h3>Kendrick Lamar</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/good kid, m.A.A.d city.jpg" alt="Good Kid, M.A.A.D City">
+                        <div class="album-info">
+                            <p class="album-name">Good Kid, M.A.A.D City</p>
+                            <p class="best-track">Best track: Swimming Pools</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/DAMN..jpg" alt="DAMN.">
+                        <div class="album-info">
+                            <p class="album-name">DAMN.</p>
+                            <p class="best-track">Best track: HUMBLE.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-drake.html">
+            <div class="artiste">
+                <img src="images/drake.jpg" alt="Drake">
+                <h3>Drake</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/take care.jpg" alt="Take Care">
+                        <div class="album-info">
+                            <p class="album-name">Take Care</p>
+                            <p class="best-track">Best track: Headlines</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/Scorpion.jpg" alt="Scorpion">
+                        <div class="album-info">
+                            <p class="album-name">Scorpion</p>
+                            <p class="best-track">Best track: God’s Plan</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-travis-scott.html">
+            <div class="artiste">
+                <img src="images/travis scott.jpg" alt="Travis Scott">
+                <h3>Travis Scott</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/utopia.jpg" alt="Utopia">
+                        <div class="album-info">
+                            <p class="album-name">Utopia</p>
+                            <p class="best-track">Best track: TIL FURTHER NOTICE</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/astroworld.jpg" alt="Astroworld">
+                        <div class="album-info">
+                            <p class="album-name">Astroworld</p>
+                            <p class="best-track">Best track: SICKO MODE</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="categorie">
+        <h2>RAP FR</h2>
+        <div class="artistes">
+            <a class="lien-artiste" href="artiste-niska.html">
+            <div class="artiste">
+                <img src="images/niska.jpg" alt="Niska">
+                <h3>Niska</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/commando.jpg" alt="Commando">
+                        <div class="album-info">
+                            <p class="album-name">Commando</p>
+                            <p class="best-track">Best track: Chasse à l'homme</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/mr sal.jpg" alt="Mr Sal">
+                        <div class="album-info">
+                            <p class="album-name">Mr Sal</p>
+                            <p class="best-track">Best track: Medicament</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-ninho.html">
+            <div class="artiste">
+                <img src="images/ninho.jpg" alt="Ninho">
+                <h3>Ninho</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/M.I.L.S 3.jpg" alt="M.I.L.S 3">
+                        <div class="album-info">
+                            <p class="album-name">M.I.L.S 3</p>
+                            <p class="best-track">Best track: Lettre à une femme</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/Destin.jpg" alt="Destin">
+                        <div class="album-info">
+                            <p class="album-name">Destin</p>
+                            <p class="best-track">Best track: La vie qu'on mène</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-leto.html">
+            <div class="artiste">
+                <img src="images/leto.jpg" alt="Leto">
+                <h3>Leto</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/100 visages.jpg" alt="100 Visages">
+                        <div class="album-info">
+                            <p class="album-name">100 Visages</p>
+                            <p class="best-track">Best track: Macaroni</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/17percent.jpg" alt="17%">
+                        <div class="album-info">
+                            <p class="album-name">17%</p>
+                            <p class="best-track">Best track: Mapessa</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+
+            <a class="lien-artiste" href="artiste-damso.html">
+            <div class="artiste">
+                <img src="images/damso.jpg" alt="Damso">
+                <h3>Damso</h3>
+                <p>Rap</p>
+                <ul class="albums">
+                    <li>
+                        <img class="album-cover" src="images/batterie faible.jpg" alt="Batterie Faible">
+                        <div class="album-info">
+                            <p class="album-name">Batterie Faible</p>
+                            <p class="best-track">Best track: Amnésie</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="album-cover" src="images/QALF.jpg" alt="QALF">
+                        <div class="album-info">
+                            <p class="album-name">QALF</p>
+                            <p class="best-track">Best track: J Respect R</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Projet SNT - Yves-edrcik MONLOUIS - YEMusic - 2026</p>
+</footer>
+<script>
+function rechercherArtiste() {
+    let recherche = document.getElementById("recherche").value.toLowerCase();
+    let categories = document.querySelectorAll(".categorie");
+
+    categories.forEach(function(categorie) {
+        let artistes = categorie.querySelectorAll(".artiste");
+        let visible = 0;
+
+        artistes.forEach(function(artiste) {
+            let nom = artiste.querySelector("h3").textContent.toLowerCase();
+            if(nom.includes(recherche)) {
+                artiste.style.display = "block";
+                visible++;
+            } else {
+                artiste.style.display = "none";
+            }
+        });
+
+        if(visible === 0) {
+            categorie.style.display = "none";
+        } else {
+            categorie.style.display = "block";
+        }
+    });
+}
+</script>
+<script>
+const artistes = document.querySelectorAll(".artiste");
+
+artistes.forEach(artiste => {
+    artiste.addEventListener("mouseenter", () => {
+        artistes.forEach(a => {
+            if (a !== artiste) {
+                a.style.opacity = "0.7";
+                a.style.filter = "blur(2px)";
+            }
+        });
+    });
+
+    artiste.addEventListener("mouseleave", () => {
+        artistes.forEach(a => {
+            a.style.opacity = "1";
+            a.style.filter = "blur(0)";
+        });
+    });
+});
+</script>
+<script>
+const cartes = document.querySelectorAll('.artiste, .albums li');
+
+cartes.forEach(carte => {
+    carte.addEventListener('mousemove', (e) => {
+        const rect = carte.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        carte.style.setProperty('--mouse-x', x + 'px');
+        carte.style.setProperty('--mouse-y', y + 'px');
+    });
+
+    carte.addEventListener('mouseleave', () => {
+        carte.style.setProperty('--mouse-x', '50%');
+        carte.style.setProperty('--mouse-y', '50%');
+    });
+});
+</script>
+<script src="transition.js"></script>
+<script src="compte.js"></script>
+</body>
+</html>

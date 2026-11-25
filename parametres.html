@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Paramètres - YEMusic</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="refonte.css">
+    <link rel="icon" type="image/png" href="images/logo rond.png">
+    <style>
+        .rg-titre { font-size: 18px; margin: 36px 0 12px; color: var(--yem-texte); }
+        .rg-groupe { background: var(--yem-carte); border-radius: 12px; overflow: hidden; }
+        .rg-ligne {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--yem-bordure);
+        }
+        .rg-ligne:last-child { border-bottom: none; }
+        .rg-ligne strong { display: block; color: var(--yem-texte); font-weight: 600; font-size: 15px; }
+        .rg-ligne small { display: block; color: var(--yem-texte-doux); font-size: 13px; margin-top: 2px; }
+        .rg-ligne select {
+            background: var(--yem-carte-haut);
+            color: var(--yem-texte);
+            border: 1px solid var(--yem-bordure);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font: inherit;
+        }
+        .rg-bouton {
+            background: transparent;
+            color: var(--yem-texte);
+            border: 1px solid var(--yem-bordure);
+            border-radius: 999px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .rg-bouton:hover { border-color: var(--yem-accent); color: var(--yem-accent); }
+
+        .rg-switch { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+        .rg-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .rg-switch span {
+            position: absolute;
+            inset: 0;
+            background: var(--yem-carte-haut);
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .rg-switch span::after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f2efee;
+            transition: transform 0.2s;
+        }
+        .rg-switch input:checked + span { background: var(--yem-accent); }
+        .rg-switch input:checked + span::after { transform: translateX(20px); }
+
+        .rg-pastilles { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+        .rg-pastille {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+        .rg-pastille.actif { border-color: #fff; }
+
+        .rg-message { color: var(--yem-texte-doux); font-size: 13px; min-height: 18px; margin: 10px 0 0; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/logo rond.png" alt="Logo YEMusic" class="logo">
+    <nav>
+        <a href="index2.html">Accueil</a>
+        <a href="artistes2.html">Artistes</a>
+        <a href="recherche.html">Recherche</a>
+        <a href="favoris.html">Favoris</a>
+        <a href="playlists.html">Playlists</a>
+        <a href="compte.html">Compte</a>
+        <a href="parametres.html">Paramètres</a>
+    </nav>
+</header>
+
+<main class="reglages">
+    <h1 class="titre-page">Paramètres</h1>
+
+    <h2 class="rg-titre">Affichage</h2>
+    <div class="rg-groupe">
+        <div class="rg-ligne">
+            <div><strong>Barre de lecture</strong><small>Afficher le lecteur en bas de l'écran</small></div>
+            <label class="rg-switch"><input type="checkbox" id="r-lecteur"><span></span></label>
+        </div>
+                <div class="rg-ligne">
+            <div><strong>Taille du texte</strong><small>Normale ou grande</small></div>
+            <select id="r-taille">
+                <option value="normal">Normale</option>
+                <option value="grand">Grande</option>
+            </select>
+        </div>
+    </div>
+
+    <h2 class="rg-titre">Lecture</h2>
+    <div class="rg-groupe">
+        <div class="rg-ligne">
+            <div><strong>Lancer un titre au clic</strong><small>Sinon, le titre est seulement sélectionné</small></div>
+            <label class="rg-switch"><input type="checkbox" id="r-clic"><span></span></label>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Lecture aléatoire par défaut</strong><small>Active le mode aléatoire à l'ouverture</small></div>
+            <label class="rg-switch"><input type="checkbox" id="r-aleatoire"><span></span></label>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Répétition</strong><small>Comportement en fin de liste</small></div>
+            <select id="r-repetition">
+                <option value="off">Désactivée</option>
+                <option value="tout">Toute la liste</option>
+                <option value="un">Un titre</option>
+            </select>
+        </div>
+    </div>
+
+    <h2 class="rg-titre">Données</h2>
+    <div class="rg-groupe">
+        <div class="rg-ligne">
+            <div><strong>Reprendre l'écoute</strong><small>Efface le dernier titre écouté</small></div>
+            <button class="rg-bouton" data-cle="yemusic_dernier" data-nom="le bloc « Reprendre l'écoute »">Effacer</button>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Pochettes personnalisées</strong><small>Efface les images que tu as importées</small></div>
+            <button class="rg-bouton" data-cle="yemusic_pochettes" data-nom="les pochettes personnalisées">Effacer</button>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Favoris</strong><small>Efface tous les titres likés</small></div>
+            <button class="rg-bouton" data-cle="yemusic_favoris" data-nom="tes favoris">Effacer</button>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Playlists</strong><small>Efface toutes tes playlists</small></div>
+            <button class="rg-bouton" data-cle="yemusic_playlists" data-nom="toutes tes playlists">Effacer</button>
+        </div>
+    </div>
+    <p class="rg-message" id="r-message"></p>
+
+    <h2 class="rg-titre">Compte</h2>
+    <div class="rg-groupe">
+        <div class="rg-ligne">
+            <div><strong>Mon compte</strong><small>Profil, connexion et sauvegarde en ligne</small></div>
+            <a class="rg-bouton" href="compte.html">Ouvrir</a>
+        </div>
+    </div>
+
+    <h2 class="rg-titre">À propos</h2>
+    <div class="rg-groupe">
+        <div class="rg-ligne">
+            <div><strong>Version</strong></div>
+            <small>1.0</small>
+        </div>
+        <div class="rg-ligne">
+            <div><strong>Projet</strong></div>
+            <small>Projet SNT - Yves-edrcik MONLOUIS - 2026</small>
+        </div>
+    </div>
+</main>
+
+<script src="menu.js"></script>
+<script>
+(function () {
+    const CLE = 'yemusic_reglages';
+    const defaut = { lecteur: true, taille: 'normal', clic: true, aleatoire: false, repetition: 'off' };
+    const $ = (id) => document.getElementById(id);
+
+    function lire() {
+        try { return Object.assign({}, defaut, JSON.parse(localStorage.getItem(CLE)) || {}); }
+        catch (e) { return Object.assign({}, defaut); }
+    }
+    function ecrire(r) {
+        try { localStorage.setItem(CLE, JSON.stringify(r)); } catch (e) {}
+    }
+    function appliquer() {
+        if (window.YEReglages) window.YEReglages.appliquer();
+    }
+
+    const reglages = lire();
+
+    ['lecteur', 'clic', 'aleatoire'].forEach((k) => {
+        const champ = $('r-' + k);
+        champ.checked = reglages[k];
+        champ.addEventListener('change', () => {
+            reglages[k] = champ.checked;
+            ecrire(reglages);
+            appliquer();
+        });
+    });
+
+    $('r-taille').value = reglages.taille;
+    $('r-taille').addEventListener('change', (e) => {
+        reglages.taille = e.target.value;
+        ecrire(reglages);
+        appliquer();
+    });
+
+    $('r-repetition').value = reglages.repetition;
+    $('r-repetition').addEventListener('change', (e) => {
+        reglages.repetition = e.target.value;
+        ecrire(reglages);
+    });
+
+    const message = $('r-message');
+    document.querySelectorAll('[data-cle]').forEach((b) => {
+        b.addEventListener('click', () => {
+            const nom = b.dataset.nom;
+            if (!confirm('Effacer ' + nom + ' ? Cette action est définitive.')) return;
+            try { localStorage.removeItem(b.dataset.cle); } catch (e) {}
+            message.textContent = 'Effacé : ' + nom + '.';
+        });
+    });
+
+    appliquer();
+})();
+</script>
+</body>
+</html>

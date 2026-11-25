@@ -108,7 +108,7 @@
     }
 
     // ----- affichage -----
-    function ajouterBouton() {
+    function ajouterBouton() { return;
         const header = document.querySelector('header');
         if (!header || document.getElementById('compte-btn')) return;
         const a = document.createElement('a');

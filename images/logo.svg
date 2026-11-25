@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="disc" x1="12%" y1="4%" x2="92%" y2="96%">
+      <stop offset="0" stop-color="#ff252f"/>
+      <stop offset="0.48" stop-color="#b90027"/>
+      <stop offset="1" stop-color="#ff303b"/>
+    </linearGradient>
+    <radialGradient id="discGlow" cx="23%" cy="18%" r="88%">
+      <stop offset="0" stop-color="#ff3c43" stop-opacity=".42"/>
+      <stop offset=".58" stop-color="#e50032" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#650018" stop-opacity=".25"/>
+    </radialGradient>
+    <linearGradient id="wave" x1="6%" y1="15%" x2="92%" y2="85%">
+      <stop offset="0" stop-color="#ff8a9b"/>
+      <stop offset=".32" stop-color="#ff4777"/>
+      <stop offset=".63" stop-color="#ff3151"/>
+      <stop offset="1" stop-color="#ff7568"/>
+    </linearGradient>
+    <clipPath id="circleClip"><circle cx="256" cy="256" r="246"/></clipPath>
+  </defs>
+  <circle cx="256" cy="256" r="246" fill="url(#disc)"/>
+  <circle cx="256" cy="256" r="246" fill="url(#discGlow)"/>
+  <g clip-path="url(#circleClip)">
+    <path fill="url(#wave)" d="M 12,280
+      C 36,281 54,273 69,256
+      C 82,241 91,228 104,230
+      C 119,233 121,260 130,282
+      C 139,306 148,327 164,327
+      C 181,327 190,301 200,268
+      L 225,151
+      C 230,129 238,107 250,105
+      C 264,102 272,125 276,153
+      L 300,350
+      C 304,383 312,420 326,420
+      C 341,420 351,385 362,345
+      L 385,254
+      C 392,226 400,205 414,205
+      C 429,205 436,229 444,252
+      C 457,290 475,305 499,304
+      C 480,319 458,328 437,327
+      C 405,325 388,306 376,279
+      C 370,265 365,251 360,251
+      C 354,251 350,274 344,296
+      L 329,354
+      C 316,405 302,444 279,444
+      C 255,444 244,408 237,365
+      L 213,202
+      C 209,179 205,170 201,171
+      C 196,172 192,190 187,212
+      L 168,294
+      C 156,344 140,374 115,374
+      C 91,374 78,346 68,315
+      C 62,296 57,281 51,281
+      C 42,281 34,290 12,280 Z"/>
+  </g>
+</svg>

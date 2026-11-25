@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <title>Mon compte - YEMusic</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="refonte.css">
     <link rel="icon" type="image/png" href="images/logo rond.png">
 </head>
 <body>
 
 <header>
-    <a href="index2.html">
-        <img src="images/logo rond.png" alt="Logo YEMusic" class="logo">
-    </a>
-<nav>
-    <a href="artistes2.html">Artistes</a>
-    <a href="favoris.html">&#9829; Favoris</a>
-    <a href="playlists.html">Playlists</a>
-    <a href="recherche.html">&#128269; Recherche</a>
-</nav>
+    <img src="images/logo rond.png" alt="Logo YEMusic" class="logo">
+    <nav>
+        <a href="index2.html">Accueil</a>
+        <a href="artistes2.html">Artistes</a>
+        <a href="recherche.html">Recherche</a>
+        <a href="favoris.html">Favoris</a>
+        <a href="playlists.html">Playlists</a>
+        <a href="compte.html">Compte</a>
+        <a href="parametres.html">Paramètres</a>
+    </nav>
 </header>
 
 <main>
@@ -92,5 +94,7 @@
         if (u) $('nom-connecte').textContent = (u.user_metadata && u.user_metadata.pseudo) || '';
     });
 </script>
+<script src="menu.js"></script>
+<script src="pochettes.js"></script>
 </body>
 </html>

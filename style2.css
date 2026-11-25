@@ -6,7 +6,7 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #8B0000, #FF0040, #FF6A00, #FFC300);
+    background: var(--yem-accent);
 }
 
 /* ===== HEADER ===== */
@@ -40,7 +40,7 @@ nav a::after {
     bottom: -3px;
     width: 0%;
     height: 2px;
-    background: linear-gradient(90deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     transition: width 0.3s;
 }
 
@@ -72,8 +72,8 @@ nav a:hover::after {
     border-color: #FF4D6D;
     box-shadow: 
         0 0 5px 2px #ff4c4c,
-        0 0 10px 4px #FF7F50,
-        0 0 15px 6px #FFA500;
+        0 0 10px 4px var(--yem-accent),
+        0 0 15px 6px var(--yem-accent);
 }
 
 /* ===== MAIN ===== */
@@ -88,7 +88,7 @@ h2 {
     margin: 40px 0 20px;
     font-size: 28px;
     font-weight: bold;
-    background: linear-gradient(90deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     -webkit-background-clip: text;
     color: white;
 }
@@ -133,7 +133,7 @@ h2 {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     opacity: 0.4;
     transform: rotate(45deg) translateX(-100%);
     transition: transform 0.7s ease;
@@ -193,7 +193,7 @@ h2 {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     opacity: 0.3;
     transform: rotate(45deg) translateX(-100%);
     transition: transform 0.7s ease;
@@ -221,7 +221,7 @@ h2 {
     height: 80%;
     width: 4px;
     border-radius: 5px;
-    background: linear-gradient(180deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -311,7 +311,7 @@ footer {
 
     transform: translateX(-4px);
 
-    border-color: #ff7f50;
+    border-color: var(--yem-accent);
 
     box-shadow:
         0 0 15px rgba(255,127,80,0.35);
@@ -381,7 +381,7 @@ footer {
 
     background-color: #2A2A2A;
 
-    color: #ffb347;
+    color: var(--yem-accent-clair);
 
 }
 
@@ -535,7 +535,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 25px;
-    background: linear-gradient(135deg, #8B0000, #FF0040, #FF6A00, #FFC300);
+    background: var(--yem-accent);
     background-size: 300% 300%;
     animation: intro-gradient 3s ease infinite,
                intro-fadeout 0.8s ease forwards 3.4s;
@@ -628,7 +628,7 @@ footer {
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #fff, #ffe9c7, #fff);
+    background: var(--yem-accent);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -724,7 +724,7 @@ body.intro-active {
     height: 70vmin;
     z-index: -1;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 230, 180, 0.55), rgba(255, 200, 120, 0) 65%);
+    background: rgba(232,50,63,0.15), rgba(255, 200, 120, 0) 65%);
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.3);
     animation: halo-in 1.6s ease-out forwards 0.6s;
@@ -772,7 +772,7 @@ body.intro-active {
 .lecteur {
     padding: 3px;
     border-radius: 18px;
-    background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     box-shadow: 0 0 18px rgba(255, 100, 60, 0.45);
     animation: lecteur-lueur 3s ease-in-out infinite alternate;
 }
@@ -795,7 +795,7 @@ body.intro-active {
 
 .tracklist li.cliquable::after {
     content: "\25B6";
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -806,7 +806,7 @@ body.intro-active {
 
 .tracklist li.active {
     background-color: #2A2A2A;
-    box-shadow: 0 0 0 2px #ff7f50, 0 8px 20px rgba(255, 120, 50, 0.35);
+    box-shadow: 0 0 0 2px var(--yem-accent), 0 8px 20px rgba(232, 50, 63, 0.35);
 }
 
 .tracklist li.active .num {
@@ -840,13 +840,13 @@ body.intro-active {
 .tracklist li:hover {
     transform: translateX(6px);
     background-color: #2A2A2A;
-    box-shadow: 0 8px 20px rgba(255, 120, 50, 0.35);
+    box-shadow: 0 8px 20px rgba(232, 50, 63, 0.35);
 }
 
 .tracklist .num {
     width: 26px;
     text-align: right;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     font-weight: bold;
 }
 
@@ -922,7 +922,7 @@ body.intro-active {
 
 .lp-boutons button:hover {
     transform: scale(1.15);
-    color: #ffb347;
+    color: var(--yem-accent-clair);
 }
 
 #lp-play {
@@ -930,7 +930,7 @@ body.intro-active {
     height: 46px;
     border-radius: 50%;
     font-size: 16px;
-    background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     box-shadow: 0 0 15px rgba(255, 120, 50, 0.5);
 }
 
@@ -947,7 +947,7 @@ body.intro-active {
 
 #lp-barre {
     flex: 1;
-    accent-color: #ff7f50;
+    accent-color: var(--yem-accent);
     cursor: pointer;
 }
 
@@ -963,7 +963,7 @@ body.intro-active {
 }
 
 #lp-shuffle.actif {
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     opacity: 1;
     text-shadow: 0 0 10px rgba(255, 150, 60, 0.8);
 }
@@ -1017,7 +1017,7 @@ body.intro-active {
 }
 
 .btn-vider:hover {
-    border-color: #ff7f50;
+    border-color: var(--yem-accent);
     box-shadow: 0 0 15px rgba(255, 127, 80, 0.35);
 }
 /* ===== PLAYLISTS ===== */
@@ -1038,7 +1038,7 @@ body.intro-active {
 .btn-retirer:hover {
     transform: scale(1.2);
     opacity: 1;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
 }
 
 .menu-playlists {
@@ -1077,7 +1077,7 @@ body.intro-active {
 }
 
 .menu-nouvelle {
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     margin-top: 4px;
     border-top: 1px solid #333;
     border-radius: 0 0 8px 8px;
@@ -1103,7 +1103,7 @@ body.intro-active {
 
 .carte-playlist:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(255, 120, 50, 0.35);
+    box-shadow: 0 12px 25px rgba(232, 50, 63, 0.35);
 }
 
 .carte-playlist img,
@@ -1119,7 +1119,7 @@ body.intro-active {
     align-items: center;
     justify-content: center;
     font-size: 48px;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     background-color: #2A2A2A;
 }
 
@@ -1177,7 +1177,7 @@ body.intro-active {
 
 .carte-reprendre:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(255, 120, 50, 0.35);
+    box-shadow: 0 12px 25px rgba(232, 50, 63, 0.35);
 }
 
 .carte-reprendre img {
@@ -1192,7 +1192,7 @@ body.intro-active {
     font-size: 11px;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
 }
 
 .reprendre-titre {
@@ -1216,7 +1216,7 @@ body.intro-active {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(120deg, red, #ff4d6d, orange, #ffb347);
+    background: var(--yem-accent);
     box-shadow: 0 0 15px rgba(255, 120, 50, 0.5);
 }
 
@@ -1229,7 +1229,7 @@ body.intro-active {
 .tracklist li.dernier .titre::after {
     content: " · dernier écouté";
     font-size: 11px;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
 }
 /* ===== BADGE "ECOUTABLE" ===== */
 .album-detail {
@@ -1244,7 +1244,7 @@ body.intro-active {
     border-radius: 12px;
     font-size: 10px;
     font-weight: bold;
-    color: #ffb347;
+    color: var(--yem-accent-clair);
     background-color: rgba(17, 14, 13, 0.85);
     border: 1px solid rgba(255, 179, 71, 0.5);
 }
@@ -1287,7 +1287,7 @@ body.quitte footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, red, #ff4d6d, orange);
+    background: var(--yem-accent);
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -1324,7 +1324,7 @@ body.quitte footer {
     padding: 10px 22px;
     border: none;
     border-radius: 30px;
-    background: linear-gradient(90deg, red, #ff4d6d, orange);
+    background: var(--yem-accent);
     color: white;
     font-size: 1rem;
     cursor: pointer;

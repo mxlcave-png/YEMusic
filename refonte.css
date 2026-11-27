@@ -693,3 +693,39 @@ header {
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
 }
+
+/* ===== Phase 3 : barre de lecture (selon le dossier) ===== */
+.lp-droite {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+.lp-droite input[type="range"] {
+    width: 110px;
+    accent-color: var(--yem-accent);
+    cursor: pointer;
+}
+.lp-droite button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--yem-texte-doux);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lp-droite button:hover { color: var(--yem-texte); background: rgba(255, 255, 255, 0.06); }
+
+/* état sans morceau : texte discret */
+#lp-titre:empty::after,
+#lp-titre { color: var(--yem-texte); }
+
+@media (max-width: 900px) {
+    .lp-droite { display: none; }
+}

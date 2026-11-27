@@ -750,3 +750,17 @@ header {
 
 /* bouton lecture / pause : icône plus grande, bien visible */
 #lp-play svg { width: 22px; height: 22px; }
+
+/* bouton lecture / pause : même taille avant et après le chargement de l'icône */
+#lp-play {
+    font-size: 20px;
+    line-height: 1;
+}
+#lp-play svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* flèche lecture : plus grande dans le bouton */
+#lp-play { font-size: 26px; }
+#lp-play svg { width: 28px; height: 28px; }

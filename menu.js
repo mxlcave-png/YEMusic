@@ -104,8 +104,12 @@
     const btnPlay = document.getElementById('lp-play');
     function majPlay() {
         if (!btnPlay) return;
-        const etat = btnPlay.textContent.indexOf('\u25B6') !== -1 ? 'play' : 'pause';
-        if (btnPlay.dataset.etat === etat) return;
+        // on ne lit l'état que dans le texte d'origine (▶ ou ❚❚), jamais dans notre icône
+        const txt = btnPlay.textContent;
+        let etat = null;
+        if (txt.indexOf('\u25B6') !== -1) etat = 'play';
+        else if (txt.indexOf('\u275A') !== -1) etat = 'pause';
+        if (!etat || btnPlay.dataset.etat === etat) return;
         btnPlay.dataset.etat = etat;
         btnPlay.innerHTML = ICONES[etat];
     }

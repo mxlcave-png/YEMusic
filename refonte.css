@@ -747,3 +747,6 @@ header {
 
 /* l'icône de volume ne coupe plus ses ondes */
 .lp-vol-icone svg { overflow: visible; }
+
+/* bouton lecture / pause : icône plus grande, bien visible */
+#lp-play svg { width: 22px; height: 22px; }

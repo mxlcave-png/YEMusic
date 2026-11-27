@@ -676,3 +676,20 @@ select:focus-visible {
     outline-offset: 2px;
     border-radius: 12px;
 }
+
+/* ===== Phase 2 : effet verre sur menu, lecteur et panneaux (selon le dossier) ===== */
+header {
+    background: rgba(19, 19, 21, 0.72) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+.lecteur-perso {
+    background: rgba(19, 19, 21, 0.8) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+.carte-panneau {
+    background: rgba(27, 27, 30, 0.7) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}

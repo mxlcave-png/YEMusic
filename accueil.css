@@ -126,3 +126,39 @@
     .bienvenue { padding: 32px 24px; }
     .bienvenue h1 { font-size: 30px; }
 }
+
+/* ===== Phase 2 : accueil (selon le dossier de refonte) ===== */
+
+/* hero : dégradé rouge sombre vers transparent */
+.bienvenue {
+    background:
+        linear-gradient(135deg, rgba(139, 0, 22, 0.55) 0%, rgba(139, 0, 22, 0) 70%),
+        #161618 !important;
+}
+.bienvenue .bouton-secondaire { margin-left: 12px; }
+
+/* artistes préférés : légère montée au survol, nom centré */
+.rangee-artistes a {
+    transition: transform 0.2s ease;
+    display: block;
+}
+.rangee-artistes a:hover { transform: translateY(-3px); }
+.rangee-artistes a span { display: block; text-align: center; }
+.entete-section a { align-self: center; }
+
+/* albums : pochettes identiques, titre sur deux lignes au maximum */
+.rangee-albums a { display: block; transition: transform 0.2s ease; }
+.rangee-albums a:hover { transform: translateY(-3px); }
+
+/* vos playlists : couverture et nombre de titres */
+.ligne-playlist small { display: block; }
+
+/* Premium : bannière plus petite et distincte */
+.premium {
+    padding: 16px !important;
+    background: #161618 !important;
+    border-left: 3px solid var(--yem-accent) !important;
+}
+.premium h2 { font-size: 16px; }
+.premium p { font-size: 13px; margin: 6px 0 12px; }
+.premium .bouton-blanc { padding: 8px 16px; font-size: 14px; }

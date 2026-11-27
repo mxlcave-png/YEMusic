@@ -547,3 +547,106 @@ header img.logo { width: 44px; height: 44px; flex-shrink: 0; margin: 0 8px 18px;
 @media (max-width: 900px) {
     header img.logo { margin: 0 10px 0 0; }
 }
+
+/* ===== Phase 1 : fondations design (sans dégradé, sans transparence) ===== */
+:root {
+    --yem-espace-1: 8px;
+    --yem-espace-2: 16px;
+    --yem-espace-3: 24px;
+    --yem-espace-4: 32px;
+    --yem-ombre: 0 6px 18px rgba(0, 0, 0, 0.35);
+    --yem-police: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+
+/* typographie : une police, trois niveaux de titres */
+body { font-family: var(--yem-police); }
+h1 { font-size: 36px; }
+h2 { font-size: 22px; }
+h3 { font-size: 17px; }
+.titre-page { font-size: 30px; margin: 0 0 var(--yem-espace-3); }
+p, small { color: var(--yem-texte-doux); }
+
+/* cartes : fond, bord fin, ombre douce, coins identiques */
+.artiste,
+.album-detail,
+.grille-playlists > *,
+.carte-reprendre,
+.carte-panneau,
+.rg-groupe,
+.bienvenue {
+    background: var(--yem-carte) !important;
+    border: 1px solid var(--yem-bordure) !important;
+    border-radius: 14px !important;
+    box-shadow: var(--yem-ombre) !important;
+}
+
+/* survol : léger relief, sans rayon ni lueur */
+.artiste,
+.album-detail,
+.grille-playlists > *,
+.carte-reprendre {
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.artiste:hover,
+.album-detail:hover,
+.grille-playlists > *:hover,
+.carte-reprendre:hover {
+    transform: translateY(-2px);
+    background: var(--yem-carte-haut) !important;
+}
+
+/* boutons : un style principal et un style secondaire */
+.bouton-rouge,
+#lp-play,
+.btn-vider,
+button.principal {
+    border-radius: 999px !important;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+.rg-bouton,
+.barre-pochette button,
+.bouton-secondaire {
+    border: 1px solid var(--yem-bordure);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--yem-texte);
+    padding: 9px 18px;
+    font: inherit;
+    cursor: pointer;
+}
+.rg-bouton:hover,
+.barre-pochette button:hover,
+.bouton-secondaire:hover {
+    border-color: var(--yem-accent);
+    color: var(--yem-accent);
+}
+
+/* navigation : texte un peu plus lisible */
+header nav a { font-weight: 500; }
+
+/* focus clavier visible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--yem-accent);
+    outline-offset: 2px;
+}
+
+/* réduction des animations si le système le demande */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+    .artiste:hover,
+    .album-detail:hover,
+    .grille-playlists > *:hover,
+    .carte-reprendre:hover {
+        transform: none;
+    }
+}

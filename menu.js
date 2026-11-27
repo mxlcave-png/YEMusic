@@ -77,16 +77,20 @@
     set('lp-ouvrir', ICONES.ouvrir);
     // icône de volume : elle change selon l'intensité (muet, faible, moyen, fort)
     function volumeIcone(v) {
-        const corps = '<path d="M4 9v6h4l5 4V5L8 9H4z"/>';
+        // zone de dessin plus large : rien n'est coupé, même au volume maximum
+        const entete = '<svg width="22" height="19" viewBox="0 0 28 24" aria-hidden="true" ' +
+            'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ' +
+            'style="overflow:visible">';
+        const corps = '<path d="M3 9v6h4l5 4V5L7 9H3z"/>';
         let ondes;
-        if (v <= 0) ondes = '<path d="M16 9l6 6M22 9l-6 6"/>';
+        if (v <= 0) ondes = '<path d="M17 9l6 6M23 9l-6 6"/>';
         else {
             ondes = '';
-            if (v >= 1) ondes += '<path d="M16 8.5a5 5 0 0 1 0 7"/>';
+            if (v >= 1) ondes += '<path d="M15.5 8.5a5 5 0 0 1 0 7"/>';
             if (v >= 34) ondes += '<path d="M18.5 6a8.5 8.5 0 0 1 0 12"/>';
-            if (v >= 67) ondes += '<path d="M20.5 4.5a10 10 0 0 1 0 15"/>';
+            if (v >= 67) ondes += '<path d="M21.5 3.5a11 11 0 0 1 0 17"/>';
         }
-        return '<svg ' + att + ' ' + LINE + '>' + corps + ondes + '</svg>';
+        return entete + corps + ondes + '</svg>';
     }
     const vol = lecteur.querySelector('.lp-vol-icone');
     const curseurVolume = document.getElementById('lp-volume');

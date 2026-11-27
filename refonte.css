@@ -729,3 +729,14 @@ header {
 @media (max-width: 900px) {
     .lp-droite { display: none; }
 }
+
+/* icônes du lecteur */
+.lp-boutons button svg,
+.lp-droite button svg { display: block; }
+.lp-vol-icone {
+    display: flex;
+    color: var(--yem-texte-doux);
+}
+.lp-vol-icone svg { display: block; }
+#lp-shuffle.actif,
+#lp-repeat.actif { color: var(--yem-accent) !important; }

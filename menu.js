@@ -67,7 +67,6 @@
         shuffle: '<svg ' + att + ' ' + LINE + '><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>',
         repeat: '<svg ' + att + ' ' + LINE + '><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>',
         ouvrir: '<svg ' + att + ' ' + LINE + '><path d="M14 4h6v6"/><path d="M20 4l-7 7"/><path d="M10 20H4v-6"/><path d="M4 20l7-7"/></svg>',
-        volume: '<svg ' + att + ' ' + LINE + '><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>'
     };
 
     const set = (id, svg) => { const b = document.getElementById(id); if (b) b.innerHTML = svg; };
@@ -76,8 +75,26 @@
     set('lp-shuffle', ICONES.shuffle);
     set('lp-repeat', ICONES.repeat);
     set('lp-ouvrir', ICONES.ouvrir);
+    // icône de volume : elle change selon l'intensité (muet, faible, moyen, fort)
+    function volumeIcone(v) {
+        const corps = '<path d="M4 9v6h4l5 4V5L8 9H4z"/>';
+        let ondes;
+        if (v <= 0) ondes = '<path d="M16 9l6 6M22 9l-6 6"/>';
+        else {
+            ondes = '';
+            if (v >= 1) ondes += '<path d="M16 8.5a5 5 0 0 1 0 7"/>';
+            if (v >= 34) ondes += '<path d="M18.5 6a8.5 8.5 0 0 1 0 12"/>';
+            if (v >= 67) ondes += '<path d="M21 3.5a12 12 0 0 1 0 17"/>';
+        }
+        return '<svg ' + att + ' ' + LINE + '>' + corps + ondes + '</svg>';
+    }
     const vol = lecteur.querySelector('.lp-vol-icone');
-    if (vol) vol.innerHTML = ICONES.volume;
+    const curseurVolume = document.getElementById('lp-volume');
+    function majVolume() {
+        if (vol && curseurVolume) vol.innerHTML = volumeIcone(Number(curseurVolume.value));
+    }
+    if (curseurVolume) curseurVolume.addEventListener('input', majVolume);
+    majVolume();
 
     // le bouton lecture change tout seul (▶ / pause) : on remet l'icône correspondante
     const btnPlay = document.getElementById('lp-play');

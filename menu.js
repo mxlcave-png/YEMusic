@@ -55,6 +55,16 @@
         lecteur.append(droite);
     }
 
+    // icônes nettes pour aléatoire et répétition (remplacent les émojis)
+    const ICONES = {
+        'lp-shuffle': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>',
+        'lp-repeat': '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>'
+    };
+    Object.keys(ICONES).forEach((id) => {
+        const b = document.getElementById(id);
+        if (b) b.innerHTML = ICONES[id];
+    });
+
     // réglages : taille du texte et affichage de la barre
     function appliquer() {
         const r = lire();

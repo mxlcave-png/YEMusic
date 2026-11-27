@@ -740,3 +740,6 @@ header {
 .lp-vol-icone svg { display: block; }
 #lp-shuffle.actif,
 #lp-repeat.actif { color: var(--yem-accent) !important; }
+
+/* icône de volume légèrement décalée vers la gauche */
+.lp-vol-icone { margin-left: -8px; }

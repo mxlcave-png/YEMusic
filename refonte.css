@@ -743,3 +743,7 @@ header {
 
 /* icône de volume légèrement décalée vers la gauche */
 .lp-vol-icone { margin-left: -8px; }
+
+
+/* l'icône de volume ne coupe plus ses ondes */
+.lp-vol-icone svg { overflow: visible; }

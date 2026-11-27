@@ -84,7 +84,7 @@
             ondes = '';
             if (v >= 1) ondes += '<path d="M16 8.5a5 5 0 0 1 0 7"/>';
             if (v >= 34) ondes += '<path d="M18.5 6a8.5 8.5 0 0 1 0 12"/>';
-            if (v >= 67) ondes += '<path d="M21 3.5a12 12 0 0 1 0 17"/>';
+            if (v >= 67) ondes += '<path d="M20.5 4.5a10 10 0 0 1 0 15"/>';
         }
         return '<svg ' + att + ' ' + LINE + '>' + corps + ondes + '</svg>';
     }
